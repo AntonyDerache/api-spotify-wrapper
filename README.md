@@ -6,7 +6,7 @@ REST application wrapping few Spotify's developers API
 
 To run the project you will need to setup application properties
 
-Create *application.properties* file in *src/main/java/ippon/resources/*
+Create *application.properties* file in *src/main/resources/*
 
 add this code inside the file and replace the placeholder by your spotify application's value
 
