@@ -8,7 +8,6 @@ import org.springframework.web.client.RestClientException;
 
 @ControllerAdvice
 public class SpotifyServiceExceptionHandler {
-
     @ExceptionHandler(RestClientException.class)
     public ResponseEntity<String> handleRestClientException(RestClientException e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());

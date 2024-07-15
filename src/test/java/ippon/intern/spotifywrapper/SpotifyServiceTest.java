@@ -29,7 +29,7 @@ public class SpotifyServiceTest {
     private RestTemplate restTemplate;
 
     @BeforeEach
-    private void init() {
+    public void init() {
         spotifyService = new SpotifyService(restTemplate);
     }
 
@@ -49,15 +49,15 @@ public class SpotifyServiceTest {
     class NestedAccessTokenDependent {
 
         @BeforeEach
-        private void init() {
+        public void init() {
             when(restTemplate
-                .postForEntity(eq("https://accounts.spotify.com/api/token"), any(), eq(AccessToken.class)))
-                .thenReturn(ResponseEntity.ok(new AccessToken("BQA2AWUcfNj2DDOtPLrngI5HYmRmJTE5aKJ8QexrscewhsfCDPOxHEED0MA2T1Y3B36Cgs4H514BvBL9")));
+                    .postForEntity(eq("https://accounts.spotify.com/api/token"), any(), eq(AccessToken.class)))
+                    .thenReturn(ResponseEntity.ok(new AccessToken("BQA2AWUcfNj2DDOtPLrngI5HYmRmJTE5aKJ8QexrscewhsfCDPOxHEED0MA2T1Y3B36Cgs4H514BvBL9")));
         }
 
         @Test
         public void searchForAnItem() {
-            String URL = "https://api.spotify.com/v1/search?q=Travis&type=album";
+            String URL = "https://api.spotify.com/v1/search?q=Travis&limit=10&type=album";
             String expectedOutput = "{albums: {name: DylanProd,total: 1}}";
 
             when(restTemplate
@@ -70,7 +70,7 @@ public class SpotifyServiceTest {
 
         @Test
         public void getAnArtist() {
-            String URL = "https://api.spotify.com/v1/search?q=Travis&type=album,tracks,playlist,artist";
+            String URL = "https://api.spotify.com/v1/search?q=Travis&limit=10&type=album,tracks,playlist,artist";
             String expectedOutput = "{albums: {name: DylanProd,total: 1}}";
             when(restTemplate
                     .exchange(eq(URL), eq(HttpMethod.GET), any(), eq(String.class)))

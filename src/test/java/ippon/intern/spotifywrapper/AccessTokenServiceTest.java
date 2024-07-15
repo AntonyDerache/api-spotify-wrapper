@@ -1,7 +1,7 @@
 package ippon.intern.spotifywrapper;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -25,7 +25,7 @@ public class AccessTokenServiceTest {
     private RestTemplate restTemplate;
 
     @BeforeEach
-    private void init() {
+    public void init() {
         accessTokenService = new AccessTokenService(restTemplate);
     }
 
@@ -37,7 +37,7 @@ public class AccessTokenServiceTest {
         accessTokenService.setNewAccessToken();
         AccessToken token = accessTokenService.getToken();
         Boolean isExpired = accessTokenService.isTokenExpired();
-        assertTrue(token.access_token() == "BQA2AWUcfNj2DDOtPLrngI5HYmRmJTE5aKJ8QexrscewhsfCDPOxHEED0MA2T1Y3B36Cgs4H514BvBL9");
+        assertSame("BQA2AWUcfNj2DDOtPLrngI5HYmRmJTE5aKJ8QexrscewhsfCDPOxHEED0MA2T1Y3B36Cgs4H514BvBL9", token.access_token());
         assertFalse(isExpired);
     }
 }
